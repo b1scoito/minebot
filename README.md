@@ -1,11 +1,11 @@
 # minebot
 Minecraft BOT in Javascript
 
-# Requirements
+## Requirements
 
 NodeJS, NPM
 
-# Modules
+### Modules
 
 `npm install mineflayer`
 Axios is not required but recommended.
