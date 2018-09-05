@@ -1,0 +1,16 @@
+{
+  "name": "testebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "keywords": [],
+  "author": "biscoitola",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "minecraft-protocol": "^1.8.0",
+    "mineflayer": "^2.7.3",
+    "sleep": "^5.2.3",
+    "socks5-client": "^1.2.6"
+  }
+}
