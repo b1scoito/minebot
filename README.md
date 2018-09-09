@@ -3,10 +3,12 @@ Minecraft BOT in Javascript
 
 ## Requirements
 
-NodeJS, NPM
-
+`nodejs`, `npm`
 ### Modules
 
 `npm install mineflayer`
-Axios is not required but recommended.
+`npm install vec3`
+`npm install discord.js`
+#### Usage
 
+`Usage : node app.js <quantity> <host> <port> <version>`
