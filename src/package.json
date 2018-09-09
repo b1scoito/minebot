@@ -8,9 +8,11 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
+    "discord.js": "^11.4.2",
     "minecraft-protocol": "^1.8.0",
     "mineflayer": "^2.7.3",
     "sleep": "^5.2.3",
-    "socks5-client": "^1.2.6"
+    "socks5-client": "^1.2.6",
+    "vec3": "^0.1.3"
   }
 }
