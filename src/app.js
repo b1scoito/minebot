@@ -1,17 +1,16 @@
 var mineflayer = require('mineflayer')
 const vec3 = require('vec3')
 require("discord.js")
+require('colors')
 var config = require('./config.json')
 var estado = "sim"
 var estadokill = "sim"
 var names = require('./names.json')
 if (process.argv.length < 6 || process.argv.length > 6) {
-    console.log('Usage : node app.js <quantity> <host> <port> <version>')
+    console.log('Comando errado, use: node app.js <quantidade> <ip> <porta> <versao>')
     process.exit(1)
 }
-console.log("MinecraftBOT beta ~ 0.32 made by b1scoito")
-console.log('\x1b[31m',
-    "BOT " + '\x1b[0m', "Joining!")
+console.log(" BOT ".red + " Joining!")
 var seilazao = process.argv[2]
 let i = 0
 var seila2 = Math.floor(Math.random() * names.length)
@@ -36,16 +35,58 @@ function createBot(name) {
         verbose: true
     })
     bot.on('login', () => {
-        console.log('\x1b[31m',
-            "BOT " + '\x1b[0m',
-            'LOGIN:  ' + bot.username)
+        console.log(" BOT ".red + ' LOGIN:  ' + bot.username)
     })
-    bot.once('spawn', () => {
-    })
+    bot.once('spawn', () => {})
     bot.on('message', (message) => {
-        console.log('\x1b[31m',
-            "LOG " + '\x1b[29m',
-            bot.username, '\x1b[0m' + " " + message.toAnsi())
+        console.log(" LOG  ".red + bot.username.red + "  " + message.toAnsi())
+    })
+    var stdin = process.openStdin();
+    //console.log("mbot".cyan + " >")
+    stdin.addListener("data", function (d) {
+        const argsa = d.toString().trim().slice("$").split(/ +/g)
+        const commanda = argsa.shift().toLowerCase()
+        //var completo = d.toString().trim().toLowerCase() + "\n"
+        switch (commanda) {
+            case '$clear':
+                console.log('\033[2J');
+                break
+            case '$retard':
+                bot.chat("eu sou retardado")
+                bot.setControlState('jump', true)
+                bot.setControlState('forward', true)
+                if (estado === "sim") {
+                    if (!target) return
+                    bot.lookAt(target.position.offset(0, target.height, 0))
+                } else {
+                    clearInterval(doidera)
+                    estado = "sim"
+                }
+                setTimeout(function () {
+                    bot.chat("eu sou retardado")
+                    bot.setControlState('jump', true)
+                    bot.setControlState('forward', true)
+                    if (estado === "sim") {
+                        if (!target) return
+                        bot.lookAt(target.position.offset(0, target.height, 0))
+                    } else {
+                        clearInterval(doidera)
+                        estado = "sim"
+                    }
+                }, 1000)
+                break
+                case '$sair':
+                bot.end()
+                break
+                case '$stop':
+                bot.clearControlStates()
+                estado = "nao"
+                estadokill = "nao"
+                break
+        }
+        var seila = d.lastIndexOf("$", 0) === 0
+        if (seila) return
+        bot.chat(d.toString().trim())
     })
     let target = null
     bot.on('chat', function (username, message) {
@@ -129,6 +170,15 @@ function createBot(name) {
             case 'construir':
                 build()
                 break
+            case 'falar':
+                if (!args) {
+                    bot.chat("Por favor coloque algum argumento para eu falar!")
+                    return
+                } else {
+                    bot.chat(args)
+                }
+
+                break
             case 'selecionar':
                 if (!args[0]) {
                     bot.chat("Por favor insira a quantidade até 8")
@@ -156,17 +206,8 @@ function createBot(name) {
         bot.chat('Morri x.x')
     })
     bot.on('end', () => {
-        console.log('\x1b[31m',
-            "BOT " + '\x1b[32m',
-            bot.username, '\x1b[0m' + " Disconnected trying to reconnect")
-        bot.quit()
-        mineflayer.createBot({
-            version: process.argv[5],
-            username: "botbackup" + i,
-            host: process.argv[3],
-            port: parseInt(process.argv[4]),
-            verbose: true
-        })
+        console.log(" BOT  ".red + bot.username.red + " Disconnected")
+        process.exit(0)
     })
 
     function nearestEntity(type) {
