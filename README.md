@@ -4,6 +4,10 @@ Minecraft BOT in Javascript
 ## Requirements
 
 `nodejs`, `npm`
+
+### Setup
+`npm install`
+
 ### Modules
 
 `npm install mineflayer`
