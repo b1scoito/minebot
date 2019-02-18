@@ -1,5 +1,5 @@
 # minebot
-Minecraft BOT in Javascript f
+Minecraft BOT in Javascript
 
 ## Requirements
 
